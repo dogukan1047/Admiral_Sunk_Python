@@ -1,0 +1,11 @@
+1--> Tek oyunculu bir oyun olacak oyunu oynamayan kişi bilgisayara karşı oynayacak
+2--> iki tane savaş alanı vardır biri oyuncunun diğeri bilgisayarın
+3--> iki tarafında belli sayıda bir gemisi vardır
+4--> Bu gemiler istege göre savaş alanına dikey veya yatay olmak üzere yerleştirilir
+5--> Her el ,her oyuncunun 3 el vuruş hakkı vardır
+6--> Her atışta vurulan yerde yeşil işaret varsa karşı tarafın gemisini vurduğunuzu belirtirir
+7--> Eğer turuncu yanarsa isabetsiz atış olduğunu anlaşılır
+
+# Savaş alanı boyutu istegimize göre belirlenebilecek
+# Gemi sayısınıda belirleyebiliyoruz
+# Random veya kendi istegimizle gemileri yerleştirebiliriz
