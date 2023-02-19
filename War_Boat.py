@@ -12,8 +12,12 @@ class War_Boat():
                 try:
                     input_result = self.input_user_result(boat)
                     satir_numarasi, sutun_numarasi, yatay_dikey = input_result.split(" ")
+                    if yatay_dikey not in ["yatay", "dikey"]:
+                        raise ValueError
+
                     satir_numarasi = int(satir_numarasi)
                     sutun_numarasi = int(sutun_numarasi)
+                    self.game_area.girilen_koordinat_uygun_mu(boat, satir_numarasi, sutun_numarasi, yatay_dikey)
                 except:
                     print("Yanlis deger girdiniz lütfren acıklamayı dikkatlice okuyunuz :")
                     satir_numarasi = None
