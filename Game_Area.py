@@ -5,8 +5,22 @@ class Game_Area():
     def __init__(self, n_satir, n_sutun):  # satir ve sutun boyutunu instance veriable olarak aldık
         self.n_satir = n_satir
         self.n_sutun = n_sutun
+        self.gemiSekli="O"
         self.savas_alani = self.init_savas_alani()
         self.bilgisyar_savas_alani = self.init_savas_alani()
+
+
+    def gemi_yerlestir(self,gemi,satir_numara,sutun_numara,Yatay_dikey):
+      for i in range(gemi):
+        if Yatay_dikey=="yatay":
+            self.savas_alani[satir_numara][sutun_numara+i]=self.gemiSekli
+        else:
+            self.savas_alani[satir_numara+i][sutun_numara ] = self.gemiSekli
+
+
+
+
+
 
     def init_savas_alani(self):  # savaş alanını satır sayısı ve sutun sayısına göre oluşturduk
         matris = []
@@ -28,10 +42,10 @@ class Game_Area():
         return "\n".join(my_Game_Area_str)
 
     def savas_alani_olustur(self, savas_alani):
-        satir_numaralari = list(range(1, self.n_satir + 1))  # satir numaralarından bir liste oluşturduk
+        satir_numaralari = list(range( self.n_satir))  # satir numaralarından bir liste oluşturduk
         satir_numaralari = list(map(str, satir_numaralari))  # burada ise liste int oluştugundan bunu str çevirdik
 
-        sutun_numaralari = list(range(1, self.n_sutun + 1))  # sutun numaralarından bir liste oluşturduk
+        sutun_numaralari = list(range( self.n_sutun))  # sutun numaralarından bir liste oluşturduk
         sutun_numaralari = list(map(str, sutun_numaralari))  # burada ise liste int oluştugundan bunu str çevirdik
 
         max_satir_numaralari = len(
