@@ -12,6 +12,7 @@ class Game_Area():
         self.n_satir = n_satir
         self.n_sutun = n_sutun
         self.gemiSekli = "O"
+        self.toplam_gemi_boyutu_noktalari = 0
 
         self.savas_alani = self.init_savas_alani()
         self.bilgisyar_savas_alani = self.init_savas_alani()
@@ -34,6 +35,8 @@ class Game_Area():
                 self.savas_alani[satir_numara][sutun_numara + i] = self.gemiSekli
             else:
                 self.savas_alani[satir_numara + i][sutun_numara] = self.gemiSekli
+
+        self.toplam_gemi_boyutu_noktalari += gemi
 
     def girilen_koordinat_uygun_mu(self, boat, satir_numarasi, sutun_numarasi, yatay_dikey):
         self.gemi_savas_alanina_sigiyor_mu(boat, satir_numarasi, sutun_numarasi, yatay_dikey)
@@ -67,6 +70,7 @@ class Game_Area():
     def guncelle(self, satir_numarasi, sutun_numarasi, bilgisayar_savas_alani):
         if bilgisayar_savas_alani.savas_alani[satir_numarasi][sutun_numarasi] == self.gemiSekli:
             self._guncelle("diger", satir_numarasi, sutun_numarasi, "isabet")
+            self.toplam_gemi_boyutu_noktalari -= 1
             bilgisayar_savas_alani._guncelle("kendi", satir_numarasi, sutun_numarasi, "hasar")
         else:
             self._guncelle("diger", satir_numarasi, sutun_numarasi, "karavana")
@@ -109,8 +113,7 @@ class Game_Area():
         savas_alani_str = bosluk_str
 
         for sutun_numarasi in sutun_numaralari:  # listeyi okuduk
-            bosluk_sayisi = max_sutun_numaralari - len(
-                sutun_numarasi) + 1  # dinamik olarak savaş alanın boşluklarını hesapladık
+            bosluk_sayisi = max_sutun_numaralari - len(sutun_numarasi) + 1  # dinamik olarak savaş alanın boşluklarını hesapladık
             bosluk_str = " " * bosluk_sayisi
             savas_alani_str += sutun_numarasi + bosluk_str
         savas_alani_str = savas_alani_str[:-len(bosluk_str)]
@@ -127,4 +130,18 @@ class Game_Area():
 
         return savas_alani_str
 
+    def atis_yapilan_koordinatlar_uygun_mu(self, satir_numarasi, sutun_numarasi):
 
+        if not (0 <= satir_numarasi and satir_numarasi < self.n_satir):
+            return False
+        if not (0 <= sutun_numarasi and sutun_numarasi < self.n_sutun):
+            return False
+
+        yesil_x = self.guncelleme_kodlari["isabet"]
+        sari_x = self.guncelleme_kodlari["karavana"]
+        kirmizi_x = self.guncelleme_kodlari["hasar"]
+
+        if self.bilgisyar_savas_alani[satir_numarasi][sutun_numarasi] in [yesil_x, sari_x]:
+            return False
+
+        return True

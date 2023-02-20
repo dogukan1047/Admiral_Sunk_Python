@@ -6,7 +6,7 @@ class War_Boat():
         self.boat = boat  # [3,5,7,4] gemiler bir liste ve her sayı gemi uzunluğunu belirtiyor
         self.savas_alani = game_area
 
-    def input_boat_coordinate(self, rastgele=False,bilgisayar_mi=False):
+    def input_boat_coordinate(self, rastgele=False, bilgisayar_mi=False):
         for boat in self.boat:
             satir_numarasi = None
             sutun_numarasi = None
@@ -14,7 +14,7 @@ class War_Boat():
             while satir_numarasi is None or sutun_numarasi is None or yatay_dikey is None:
                 try:
                     if rastgele:
-                        input_result=self.rastgele_konum_yarat()
+                        input_result = self.rastgele_konum_yarat()
                     else:
                         input_result = self.input_user_result(boat)
                     satir_numarasi, sutun_numarasi, yatay_dikey = input_result.split(" ")
@@ -22,7 +22,7 @@ class War_Boat():
                         raise ValueError
                     satir_numarasi = int(satir_numarasi)
                     sutun_numarasi = int(sutun_numarasi)
-                    self.savas_alani.girilen_koordinat_uygun_mu(boat, satir_numarasi, sutun_numarasi,yatay_dikey)
+                    self.savas_alani.girilen_koordinat_uygun_mu(boat, satir_numarasi, sutun_numarasi, yatay_dikey)
                 except:
                     if not rastgele:
                         print("Yanlis deger girdiniz lütfren acıklamayı dikkatlice okuyunuz :")
@@ -45,7 +45,10 @@ savas alanınızın şu anki hali:
         return input_result
 
     def rastgele_konum_yarat(self):
-        satir_numarasi = random.randint(0,self.savas_alani.n_satir-1)
-        sutun_numarasi = random.randint(0,self.savas_alani.n_sutun-1)
-        yatay_dikey=random.choice(["yatay","dikey"])
+        satir_numarasi = random.randint(0, self.savas_alani.n_satir - 1)
+        sutun_numarasi = random.randint(0, self.savas_alani.n_sutun - 1)
+        yatay_dikey = random.choice(["yatay", "dikey"])
         return f"{satir_numarasi} {sutun_numarasi} {yatay_dikey}"
+
+    def butun_gemiler_batti_mi(self):
+        return self.savas_alani.toplam_gemi_boyutu_noktalari == 0
